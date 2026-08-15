@@ -50,7 +50,8 @@ rental_module.zip
 git.sh
 sync-branch.sh
 ios/.git-ios-backup/
-ios/Runner.xcworkspace/xcshareddata/swiftpm/
+ios/Runner.xcworkspace/xcshareddata/swiftpm/*
+!ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
 # Web related
 
