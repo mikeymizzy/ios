@@ -50,37 +50,46 @@ Future<void> main() async {
     return true;
   };*/
 
-  if(GetPlatform.isWeb){
-    await Firebase.initializeApp(options: const FirebaseOptions(
-        apiKey: "AIzaSyD0Z911mOoWCVkeGdjhIKwWFPRgvd6ZyAw",
-        authDomain: "stackmart-500c7.firebaseapp.com",
-        projectId: "stackmart-500c7",
-        storageBucket: "stackmart-500c7.appspot.com",
-        messagingSenderId: "491987943015",
-        appId: "1:491987943015:web:d8bc7ab8dbc9991c8f1ec2"
-    ));
-  } else if(GetPlatform.isAndroid) {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: "AIzaSyA_N6K3-UOodgjzgrvmgfBe9NLw3P5OARE",
-        appId: "1:971208270373:android:566d83f7c1b100fddb15cc",
-        messagingSenderId: "971208270373",
-        projectId: "to12-a1f1b",
-        storageBucket: "to12-a1f1b.firebasestorage.app",
-      ),
-    );
-  } else if(GetPlatform.isIOS) {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: "AIzaSyBzHWIQp_RVmD4zN5lSCnBy1SPkvfHrIMQ",
-        appId: "1:491987943015:ios:4758bd1017291d268f1ec2",
-        messagingSenderId: "491987943015",
-        projectId: "stackmart-500c7",
-        storageBucket: "stackmart-500c7.appspot.com",
-      ),
-    );
-  } else {
-    await Firebase.initializeApp();
+  try {
+    if(Firebase.apps.isNotEmpty) {
+      Firebase.app();
+    } else if(GetPlatform.isWeb){
+      await Firebase.initializeApp(options: const FirebaseOptions(
+          apiKey: "AIzaSyD0Z911mOoWCVkeGdjhIKwWFPRgvd6ZyAw",
+          authDomain: "stackmart-500c7.firebaseapp.com",
+          projectId: "stackmart-500c7",
+          storageBucket: "stackmart-500c7.appspot.com",
+          messagingSenderId: "491987943015",
+          appId: "1:491987943015:web:d8bc7ab8dbc9991c8f1ec2"
+      ));
+    } else if(GetPlatform.isAndroid) {
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(
+          apiKey: "AIzaSyA_N6K3-UOodgjzgrvmgfBe9NLw3P5OARE",
+          appId: "1:971208270373:android:566d83f7c1b100fddb15cc",
+          messagingSenderId: "971208270373",
+          projectId: "to12-a1f1b",
+          storageBucket: "to12-a1f1b.firebasestorage.app",
+        ),
+      );
+    } else if(GetPlatform.isIOS) {
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(
+          apiKey: "AIzaSyBzHWIQp_RVmD4zN5lSCnBy1SPkvfHrIMQ",
+          appId: "1:491987943015:ios:4758bd1017291d268f1ec2",
+          messagingSenderId: "491987943015",
+          projectId: "stackmart-500c7",
+          storageBucket: "stackmart-500c7.appspot.com",
+        ),
+      );
+    } else {
+      await Firebase.initializeApp();
+    }
+  } on FirebaseException catch (e) {
+    if(e.code != 'duplicate-app') {
+      rethrow;
+    }
+    Firebase.app();
   }
 
   Map<String, Map<String, String>> languages = await di.init();
@@ -232,4 +241,3 @@ class _MyAppState extends State<MyApp> {
     });
   }
 }
-

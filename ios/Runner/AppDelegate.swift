@@ -1,7 +1,6 @@
 import UIKit
 import Flutter
 import GoogleMaps
-import Firebase
 import FBSDKCoreKit
 
 @main
@@ -10,7 +9,6 @@ import FBSDKCoreKit
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    FirebaseApp.configure()
     GMSServices.provideAPIKey("AIzaSyCaCSJ0BZItSyXqBv8vpD1N4WBffJeKhLQ")
     if #available(iOS 10.0, *) {
       UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
