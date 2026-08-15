@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "971208270373",
+    "project_id": "to12-a1f1b",
+    "storage_bucket": "to12-a1f1b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971208270373:android:566d83f7c1b100fddb15cc",
+        "android_client_info": {
+          "package_name": "com.twelveto12.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971208270373-vam4dpsnvam281o6eoeihas6mpfspfv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_N6K3-UOodgjzgrvmgfBe9NLw3P5OARE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971208270373-qaspndc2iqm2heo5qe819pnommmpiel2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "971208270373-lqo8lvk08r6fv0acjhhqf4ej54uglr21.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.twelveto12.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
