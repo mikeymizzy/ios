@@ -5,7 +5,6 @@ import 'package:sixam_mart/api/local_client.dart';
 import 'package:sixam_mart/common/enums/data_source_enum.dart';
 import 'package:sixam_mart/common/models/response_model.dart';
 import 'package:sixam_mart/api/api_client.dart';
-import 'package:sixam_mart/features/splash/domain/models/landing_model.dart';
 import 'dart:convert';
 import 'package:sixam_mart/features/address/domain/models/address_model.dart';
 import 'package:sixam_mart/common/models/module_model.dart';
@@ -22,7 +21,7 @@ class SplashRepository implements SplashRepositoryInterface {
 
   @override
   Future<Response> getConfigData({required DataSourceEnum source}) async {
-    Response responseData = Response(statusCode: 00, body: ApiClient.noInternetMessage);
+    Response responseData = Response(statusCode: 0, body: ApiClient.noInternetMessage, statusText: ApiClient.noInternetMessage);
     String cacheId = AppConstants.configUri + AppConstants.appVersion.toString();
 
     switch(source) {

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:sixam_mart/common/enums/data_source_enum.dart';
 import 'package:sixam_mart/features/auth/controllers/auth_controller.dart';
 import 'package:sixam_mart/features/cart/controllers/cart_controller.dart';
 import 'package:sixam_mart/features/splash/controllers/splash_controller.dart';
@@ -41,7 +42,6 @@ class SplashScreenState extends State<SplashScreen> {
           content: Text(isConnected ? 'connected'.tr : 'no_connection'.tr, textAlign: TextAlign.center),
         ));
         if(isConnected) {
-          print('=========here coming-----1-->> ${Get.find<SplashController>().deeplinkRoute}');
           if(Get.find<SplashController>().deeplinkRoute == null) {
             Get.find<SplashController>().getConfigData(notificationBody: widget.body, fromSplash: true);
           }
@@ -56,16 +56,19 @@ class SplashScreenState extends State<SplashScreen> {
       Get.find<CartController>().getAllCarts();
     }
     // _route();
-    print('=========here coming-----2-->> ${Get.find<SplashController>().deeplinkRoute == null}');
     if(Get.find<SplashController>().deeplinkRoute == null) {
-      Get.find<SplashController>().getConfigData(notificationBody: widget.body, fromSplash: true);
+      _route();
     }
-    _route();
 
-    // Fallback timeout to prevent getting stuck on splash screen
+    // Retry the remote config once if startup is still on splash.
     Timer(const Duration(seconds: 15), () {
-      if (mounted && Get.currentRoute == RouteHelper.splash) {
-        Get.offAllNamed(RouteHelper.getInitialRoute(fromSplash: true));
+      if (mounted && Get.currentRoute.startsWith(RouteHelper.splash)) {
+        Get.find<SplashController>().getConfigData(
+          handleMaintenanceMode: false,
+          notificationBody: widget.body,
+          source: DataSourceEnum.client,
+          fromSplash: true,
+        );
       }
     });
   }
@@ -83,7 +86,6 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<SplashController>().initSharedData();
     if(AddressHelper.getUserAddressFromSharedPref() != null && AddressHelper.getUserAddressFromSharedPref()!.zoneIds == null) {
       Get.find<AuthController>().clearSharedAddress();
     }
